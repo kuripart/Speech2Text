@@ -19,6 +19,15 @@ public class MainActivity extends AppCompatActivity {
     SpeechRecognizer mSpeechRecognizer;
     ImageButton micButton;
 
+
+    //NOTES ON USING GOOGLE'S SPEECH RECOGNIZER:
+
+    //Create a Speech Recognizer using SpeechRecognizer.createSpeechRecognizer(this);
+    //Make an intent and pass in the necessary information regarding the language input
+    //When the button/prompt is made, invoke startListening() and pass in the intent
+    //In mSpeechRecognizer.setRecognitionListener(new RecognitionListener() -->
+    //override the onResults(), get the result in an array list and display the first match
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +37,28 @@ public class MainActivity extends AppCompatActivity {
         voiceLayerInput = (TextInputLayout) findViewById(R.id.voice_input_layout);
         micButton = (ImageButton) findViewById(R.id.mic_button);
         mSpeechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
+
+
+        /*
+
+        EXTRA_LANGUAGE_MODEL
+        Informs the recognizer which speech model to prefer when performing ACTION_RECOGNIZE_SPEECH.
+        The recognizer uses this information to fine tune the results. This extra is required.
+        Activities implementing ACTION_RECOGNIZE_SPEECH may interpret the values as they see fit
+
+
+        LANGUAGE_MODEL_FREE_FORM
+        Use a language model based on free-form speech recognition.
+        This is a value to use for EXTRA_LANGUAGE_MODEL.
+
+
+
+        EXTRA_LANGUAGE
+        Optional IETF language tag (as defined by BCP 47), for example "en-US".
+        This tag informs the recognizer to perform speech recognition in a language different
+        than the one set in the getDefault().
+
+         */
 
 
         final Intent mSpeechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
